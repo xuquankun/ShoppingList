@@ -13,5 +13,17 @@ namespace ShoppingList
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            AppDomain currentDomain = AppDomain.CurrentDomain;
+            currentDomain.UnhandledException += new UnhandledExceptionEventHandler(handler);
+        }
+
+        static void handler(object sender, UnhandledExceptionEventArgs args)
+        {
+            Exception e = (Exception)args.ExceptionObject;
+            MessageBox.Show(e.Message);
+        }
     }
 }
+
